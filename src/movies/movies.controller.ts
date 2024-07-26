@@ -6,6 +6,7 @@ import {
   Param,
   Delete,
   Put,
+  Render,
 } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { Movie } from './movie.entity';
@@ -13,6 +14,13 @@ import { Movie } from './movie.entity';
 @Controller('movies')
 export class MoviesController {
   constructor(private readonly moviesService: MoviesService) {}
+
+  @Get()
+  @Render('movies-list')
+  async getMoviesList() {
+    const movies = await this.moviesService.findAll();
+    return { movies };
+  }
 
   @Get()
   findAll(): Promise<Movie[]> {

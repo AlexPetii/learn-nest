@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie</title>
+</head>
+<body>
+  <h1>Add a New Movie</h1>
+  <form action="/movies" method="post">
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title" required><br>
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" required></textarea><br>
+    <label for="criticRating">Critic Rating:</label>
+    <input type="number" id="criticRating" name="criticRating" step="0.1" required><br>
+    <label for="myRating">My Rating:</label>
+    <input type="number" id="myRating" name="myRating" step="0.1" required><br>
+    <label for="imageUrl">Image URL:</label>
+    <input type="text" id="imageUrl" name="imageUrl"><br>
+    <button type="submit">Add Movie</button>
+    <a href="/movies">View All Movies</a>
+  </form>
+</body>
+</html>

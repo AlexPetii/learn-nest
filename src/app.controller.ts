@@ -1,12 +1,27 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Body, Controller, Get, Post, Redirect, Render } from '@nestjs/common';
+import { MoviesService } from './movies/movies.service';
+import { Movie } from './movies/movie.entity';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly movieService: MoviesService) {}
 
   @Get()
-  getHello(): string {
-    return `Welcome to NestJs application`;
+  @Render('index')
+  getRoot() {
+    return {};
+  }
+
+  @Post('/movies')
+  async addMovie(@Body() movieData: Partial<Movie>) {
+    await this.movieService.create(movieData as Movie);
+    return { message: 'Movie add' };
+  }
+
+  @Get('/movies')
+  @Render('movies-list')
+  async getMoviesList() {
+    const movies = await this.movieService.findAll();
+    return { movies };
   }
 }
